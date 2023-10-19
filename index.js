@@ -23,39 +23,39 @@ app.get('/students', (req, res) => {
 app.post('/student', (req, res) => {
     const { name, age, number, email } = req.body;
 
-    if(!name){
-       
+    if (!name) {
+
         return res.json({
             success: false,
             message: `name is required `,
-    
+
         });
     }
 
-    if(!number){
-        
+    if (!number) {
+
         return res.json({
             success: false,
             message: `number is required `,
-    
+
         });
     }
 
-    if(!age){
-     
+    if (!age) {
+
         return res.json({
             success: false,
             message: `age is required `,
-    
+
         });
     }
 
-    if(!email){
-      
+    if (!email) {
+
         return res.json({
             success: false,
             message: `email is required `,
-    
+
         });
     }
 
@@ -78,42 +78,37 @@ app.post('/student', (req, res) => {
         message: `successfully added new data. `,
 
     });
-    
+
 })
 
-   
-app.get('/boy', (req, res)=>{
-    const {id} = req.query;
+app.get('/boy', (req, res) => {
+    const { id } = req.query;
     let boy = null;
 
-students.forEach((stud)=>{
-    if(stud.id == id){
-        boy = stud;  
+    students.forEach((stud) => {
+        if (stud.id == id) {
+            boy = stud;
+        }
+
+    })
+
+    if (boy == null) {
+
+        return res.json({
+            success: false,
+            message: `student not found `,
+        })
     }
 
-})
-
-if(boy == null){
-
-    return res.json({
-        success: false,
-            message: `student not found `,
-    })
-}
-
-res.json({
-    success: true,
-    data: boy,
+    res.json({
+        success: true,
+        data: boy,
         message: `successfully added new student. `,
-})
-   
-
-
-} )
-
-
-
-
-    app.listen(PORT, () => {
-        console.log(` server running on port ${PORT} `);
     })
+
+
+
+})
+app.listen(PORT, () => {
+    console.log(` server running on port ${PORT} `);
+})
